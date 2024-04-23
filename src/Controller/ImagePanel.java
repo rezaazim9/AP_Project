@@ -16,10 +16,28 @@ public class ImagePanel extends JPanel
         this.height=height;
         this.width=width;
     }
+  private int x;
+    private int y;
+
+        public int getX2() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY2() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.drawImage(backgroundImage, 0, 0,width,height, this);
+        g.drawImage(backgroundImage,getX2(),getX2(),width,height, this);
     }
 }

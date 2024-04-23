@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Menu extends JPanel implements ActionListener {
-    public JFrame menuFrame = new JFrame();
+    public static JFrame menuFrame = new JFrame();
     JButton exit = new JButton();
     JButton tutorial = new JButton();
     JButton start = new JButton();
@@ -69,19 +69,23 @@ public class Menu extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(exit)) {
-            MenuActions.exit();
+            new MenuActions().exit();
         }
         if (e.getSource().equals(settings)) {
-            MenuActions.settings();
+            new MenuActions().settings();
         }
         if (e.getSource().equals(start)) {
-            MenuActions.start();
+            try {
+                new MenuActions().start();
+            } catch (IOException | AWTException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         if (e.getSource().equals(skillTree)) {
-            MenuActions.skillTree();
+            new MenuActions().skillTree();
         }
         if (e.getSource().equals(tutorial)) {
-            MenuActions.tutorial();
+            new MenuActions().tutorial();
         }
     }
 }
