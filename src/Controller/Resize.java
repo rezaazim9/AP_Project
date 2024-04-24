@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Circle;
 import View.GameFrame;
 
 import java.awt.event.ActionEvent;
@@ -10,19 +9,18 @@ import java.awt.event.MouseListener;
 import javax.swing.Timer;
 
 import static Controller.ImagePanel.ball;
+import static Controller.Shoot.bullets;
 import static View.GameFrame.*;
-
 
 public class Resize implements ActionListener, MouseListener {
     static Timer timer;
+    int reSize = 1;
 
     public void resizeFrame() {
         gameFrame.addMouseListener(this);
         timer = new Timer(15, this);
         timer.start();
     }
-
-    int reSize = 1;
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -31,20 +29,34 @@ public class Resize implements ActionListener, MouseListener {
         panel.setY(panel.getY2() - reSize);
         ball.setX(ball.getX() - reSize);
         ball.setY(ball.getY() - reSize);
-        ball.paint(panel.getGraphics());
-        if (GameFrame.gameFrame.getWidth() <= 200) {
+        for (Shoot bullet : bullets) {
+            ball.paint(panel.getGraphics());
+            bullet.setX(bullet.getX() + (int) (bullet.getxSpeed()));
+            bullet.setY(bullet.getY() + (int) bullet.getySpeed());
+            bullet.paint(panel.getGraphics());
+        }
+        if (GameFrame.gameFrame.getWidth() <= 500) {
             reSize = 0;
         }
     }
 
+    int xMouse;
+    int yMouse;
+
     @Override
     public void mouseClicked(MouseEvent e) {
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
-
+        yMouse = e.getY();
+        xMouse = e.getX();
+        if (reSize == 0) {
+            Shoot bullet = new Shoot(ImagePanel.ball.getX(), ImagePanel.ball.getY(), 10,0,0).bulletMaker();
+            bullet.setxSpeed(10 * (-ball.getX() + xMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));
+            bullet.setySpeed(10 * (-ball.getY() + yMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));
+        }
     }
 
     @Override
