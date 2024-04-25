@@ -5,6 +5,8 @@ import Model.Circle;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.PaintEvent;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -13,7 +15,7 @@ public class ImagePanel extends JPanel {
     private final int height;
     private final Image backgroundImage;
     private final String image;
-    public static Circle ball = new Circle(340, 340, 25);
+    public static Circle ball = new Circle(340, 340, 25,0);
 
 
     public ImagePanel(String fileName, int width, int height) throws IOException {
@@ -52,5 +54,6 @@ public class ImagePanel extends JPanel {
         g.drawImage(backgroundImage, getX2(), getY2(), width, height, this);
         ball.paint(g);
     }
+
 
 }

@@ -5,47 +5,53 @@ import Model.Circle;
 import java.awt.*;
 import java.util.ArrayList;
 
+
 public class Shoot extends Circle {
     public static ArrayList<Shoot> bullets = new ArrayList<>();
 
-    public Shoot(int x, int y, int radius ,final double xSpeed,final double ySpeed) {
-        super(x, y, radius);
+    public Shoot(double x, double y, int radius ,int id,final double xSpeed,final double ySpeed) {
+        super(x, y, radius,id);
+        this.setX(x);
+        this.setY(y);
+        this.setRadius(radius);
+        this.setId(id);
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
     }
 
-    public  Shoot bulletMaker() {
-        Shoot bullet = new Shoot(ImagePanel.ball.getX(), ImagePanel.ball.getY(), 10,0,0);
-        bullet.setX(ImagePanel.ball.getX()+8);
-        bullet.setY(ImagePanel.ball.getY()+8);
-        bullets.add(bullet);
-        return bullet;
-    }
 
-    private int x;
-    private int y;
+
+    private double x;
+    private double  y;
     private double xSpeed;
     private double ySpeed;
-
+    private Color color=Color.GREEN;
 
     public void paint(Graphics g) {
-        g.setColor(Color.GREEN);
-        g.fillOval(getX(), getY(), 10, 10);
+        g.setColor(getColor());
+        g.fillOval((int) getX(),(int) getY(), 10, 10);
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
+    public Color getColor() {
+        return color;
+    }
 
-    public int getY() {
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
@@ -64,4 +70,5 @@ public class Shoot extends Circle {
     public void setySpeed(double ySpeed) {
         this.ySpeed = ySpeed;
     }
+
 }
