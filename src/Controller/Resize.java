@@ -4,7 +4,6 @@ import View.GameFrame;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.*;
@@ -105,9 +104,6 @@ public class Resize implements ActionListener, MouseListener, KeyListener {
     public void keyTyped(KeyEvent e) {
 
     }
-
-    boolean w = false;
-
     @Override
     public void keyPressed(KeyEvent e) {
         pressedKeys.add(e.getKeyCode());
