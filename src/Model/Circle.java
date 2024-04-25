@@ -6,12 +6,16 @@ public class Circle {
     private double x;
     private double y;
     private int radius;
-    private Color color=Color.RED;
+    private Color color;
+    private double xSpeed;
+    private double ySpeed;
     private int id;
 
-    public Circle(double x,double y, int radius,int id) {
+    public Circle(double x,double y, int radius,int id,Color color) {
         this.x = x;
         this.y = y;
+        this.color = color;
+        this.id = id;
         this.radius = radius;
     }
 
@@ -22,9 +26,8 @@ public class Circle {
 
     public void paint(Graphics g) {
         g.setColor(getColor());
-        g.fillOval((int )getX(),(int) getY(), getRadius(), getRadius());
+        g.fillOval((int) getX(),(int) getY(), getRadius(), getRadius());
     }
-
     public void setX(double x) {
         this.x = x;
 
@@ -35,9 +38,6 @@ public class Circle {
 
     public void setColor(Color color) {
         this.color = color;
-    }
-    public void remove() {
-        setColor(new Color(0,0,0,0));
     }
 
     public double getY() {
@@ -58,6 +58,21 @@ public class Circle {
 
     public int getRadius() {
         return radius;
+    }
+    public double getxSpeed() {
+        return xSpeed;
+    }
+
+    public void setxSpeed(double xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+
+    public double getySpeed() {
+        return ySpeed;
+    }
+
+    public void setySpeed(double ySpeed) {
+        this.ySpeed = ySpeed;
     }
 
     public void setRadius(int radius) {

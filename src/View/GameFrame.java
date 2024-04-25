@@ -1,13 +1,16 @@
 package View;
 
 import Controller.*;
+import Model.Circle;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GameFrame{
     public static JFrame gameFrame = new JFrame();
+    public static ArrayList<Circle> bullets = new ArrayList<>();
     public static ImagePanel panel;
 
     public void mainFrame() throws IOException {
