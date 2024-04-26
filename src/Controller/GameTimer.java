@@ -51,13 +51,17 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
             infoCounter = 0;
             infoBoolean=false;
         }
-        ball.setX(ball.getX() - reSize + ballX);
-        ball.setY(ball.getY() - reSize - ballY);
+        if (ball.getY()>panel.getY()&&ball.getY()+ball.getRadius()<panel.getY()+panel.getHeight()||ballY*(ball.getY()-panel.getY())>=0) {
+            ball.setY(ball.getY() - reSize - ballY);
+        }
+        if (ball.getX()>panel.getX()&&ball.getX()+ball.getRadius()<panel.getX()+panel.getWidth()||ballX*(ball.getX()-panel.getX())<=0) {
+            ball.setX(ball.getX() - reSize + ballX);
+        }
         for (Circle bullet : bullets) {
             bullet.setX(bullet.getX() + bullet.getxSpeed());
             bullet.setY(bullet.getY() + bullet.getySpeed());
         }
-        if (GameFrame.gameFrame.getWidth() <= 200) {
+        if (GameFrame.gameFrame.getWidth() <= 500) {
             reSize = 0;
         }
         panel.repaint();
