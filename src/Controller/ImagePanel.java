@@ -18,7 +18,7 @@ public class ImagePanel extends JPanel {
     private final int height;
     private final Image backgroundImage;
     private final String image;
-    public static Circle ball = new Circle(340, 340, 25,0,Color.RED);
+    public static Circle ball = new Circle(340, 340, 25, 0, Color.RED);
 
 
     public ImagePanel(String fileName, int width, int height) throws IOException {
@@ -42,7 +42,8 @@ public class ImagePanel extends JPanel {
     public int getY2() {
         return y;
     }
-    public Image getBackgroundImage(){
+
+    public Image getBackgroundImage() {
         return backgroundImage;
     }
 
@@ -58,11 +59,9 @@ public class ImagePanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, getX2(), getY2(), width, height, this);
-        ball.paint(g);
         for (Circle bullet : bullets) {
-              bullet.paint(g);
+            bullet.paint(g);
         }
+        ball.paint(g);
     }
-
-
 }
