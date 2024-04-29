@@ -15,7 +15,10 @@ public class GameFrame{
     public static ArrayList<Circle> bullets = new ArrayList<>();
     public static ArrayList<Square> squares = new ArrayList<>();
     public static ArrayList<Triangle> triangles = new ArrayList<>();
-
+    public static int time = 0;
+    public static int wave=0;
+    public static int xp=0;
+    public static int hp=0;
     public static ImagePanel panel;
    public static JLabel information=new JLabel();
 
@@ -34,9 +37,9 @@ public class GameFrame{
     }
     public static void information(){
         information.setForeground(Color.YELLOW);
-        information.setText("yoooo");
-        information.setFont(new Font("Times New Roman", Font.PLAIN, 30));
-        information.setBounds(310,700-information.getFont().getSize()-15,100,information.getFont().getSize());
+        information.setText("Wave :"+wave+" Time:"+time+" XP:0"+xp+" HP:"+hp);
+        information.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+        information.setBounds(270,700-information.getFont().getSize()-15,180,information.getFont().getSize());
         information.setVisible(false);
         panel.add(information);
     }
