@@ -2,6 +2,8 @@ package View;
 
 import Controller.*;
 import Model.Circle;
+import Model.Square;
+import Model.Triangle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +13,9 @@ import java.util.ArrayList;
 public class GameFrame{
     public static JFrame gameFrame = new JFrame();
     public static ArrayList<Circle> bullets = new ArrayList<>();
+    public static ArrayList<Square> squares = new ArrayList<>();
+    public static ArrayList<Triangle> triangles = new ArrayList<>();
+
     public static ImagePanel panel;
    public static JLabel information=new JLabel();
 

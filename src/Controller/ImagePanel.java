@@ -1,17 +1,16 @@
 package Controller;
 
 import Model.Circle;
+import Model.Square;
+import Model.Triangle;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.PaintEvent;
-
 import java.io.File;
 import java.io.IOException;
 
-import static View.GameFrame.bullets;
-import static View.GameFrame.panel;
+import static View.GameFrame.*;
 
 public class ImagePanel extends JPanel {
     private final int width;
@@ -61,6 +60,12 @@ public class ImagePanel extends JPanel {
         g.drawImage(backgroundImage, getX2(), getY2(), width, height, this);
         for (Circle bullet : bullets) {
             bullet.paint(g);
+        }
+        for (Square square:squares){
+            square.draw(g);
+        }
+        for (Triangle triangle:triangles){
+            triangle.draw(g);
         }
         ball.paint(g);
     }

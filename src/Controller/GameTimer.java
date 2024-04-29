@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Circle;
+import Model.Square;
+import Model.Triangle;
 import View.GameFrame;
 
 import java.awt.*;
@@ -23,6 +25,8 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
     public void gameTimer() {
         gameFrame.addMouseListener(this);
         gameFrame.addKeyListener(this);
+        triangles.add(new Triangle(450,450,25,Color.YELLOW,0,0,0,0,5));
+        squares.add(new Square(400,400,35,Color.GREEN,0,0,0,0,5));
         timer = new Timer(15, this);
         timer.start();
     }
