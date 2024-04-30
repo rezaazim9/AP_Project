@@ -12,12 +12,13 @@ public class MenuActions {
         System.exit(0);
     }
 
-    public  void settings() {
-
+    public  void settings() throws IOException {
+        Menu.menuFrame.dispose();
+        new SettingsFrame().settingsFrame();
     }
 
     public void start() throws IOException, AWTException {
-        Menu.menuFrame.setVisible(false);
+        Menu.menuFrame.dispose();
         Robot robot = new Robot();
         robot.keyPress(KeyEvent.VK_WINDOWS);
         robot.keyPress(KeyEvent.VK_D);

@@ -72,7 +72,11 @@ public class Menu extends JPanel implements ActionListener {
             new MenuActions().exit();
         }
         if (e.getSource().equals(settings)) {
-            new MenuActions().settings();
+            try {
+                new MenuActions().settings();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         if (e.getSource().equals(start)) {
             try {
