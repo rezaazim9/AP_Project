@@ -16,13 +16,13 @@ public  class MenuActions {
 
     public  void settings() throws IOException {
         ImagePanel.clearGameFrame();
-        menuFrame.setVisible(false);
+        menuFrame.dispose();
         new SettingsFrame().settingsFrame();
     }
 
     public void start() throws IOException, AWTException {
         ImagePanel.paintGameFrame();
-        menuFrame.setVisible(false);
+        menuFrame.dispose();
         Robot robot = new Robot();
         robot.keyPress(KeyEvent.VK_WINDOWS);
         robot.keyPress(KeyEvent.VK_D);

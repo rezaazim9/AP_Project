@@ -8,7 +8,6 @@ import View.Menu;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.*;
@@ -22,15 +21,18 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
     Integer info = 0;
 
     static Timer timer;
-    int reSize ;
+    int reSize=1;
 
-    public void gameTimer()  {
-        reSize=1;
+    public  void gameTimer() {
+
+
         gameFrame.addMouseListener(this);
         gameFrame.addKeyListener(this);
         ball.setX(340);
         ball.setY(340);
-        triangles.add(new Triangle(450, 450, 25, Color.YELLOW, 0, 0, 0, 0, 5));
+        panel.setY(0);
+        panel.setX(0);
+        information.setLocation(270, 700 - information.getFont().getSize() - 15);
         squares.add(new Square(400, 400, 35, Color.GREEN, 0, 0, 0, 0, 5));
         timer = new Timer(15, this);
         timer.start();
@@ -43,17 +45,19 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        GameFrame.gameFrame.setBounds(gameFrame.getX() + reSize, gameFrame.getY() + reSize, gameFrame.getWidth() - reSize * 2, gameFrame.getHeight() - reSize * 2);
+        gameFrame.setBounds(gameFrame.getX() + reSize, gameFrame.getY() + reSize, gameFrame.getWidth() - reSize * 2, gameFrame.getHeight() - reSize * 2);
         panel.setX(panel.getX2() - reSize);
         panel.setY(panel.getY2() - reSize);
         information.setLocation(information.getX() - reSize, information.getY() - 2 * reSize);
         movement();
         if (info == VK_Q) {
+            infoBoolean = true;
+        }
+        if (info == VK_E) {
             gameFrame.dispose();
             ImagePanel.clearGameFrame();
             Menu.menuFrame.setVisible(true);
             timer.stop();
-            infoBoolean = true;
         }
         if (infoBoolean) {
             infoCounter += 15;
@@ -74,9 +78,10 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
             bullet.setX(bullet.getX() + bullet.getxSpeed());
             bullet.setY(bullet.getY() + bullet.getySpeed());
         }
-        if (GameFrame.gameFrame.getWidth() <= 200) {
+        if ( gameFrame.getWidth() <= 200) {
             reSize = 0;
         }
+        panel.validate();
         panel.repaint();
     }
 
@@ -114,7 +119,7 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
     public void mousePressed(MouseEvent e) {
         yMouse = e.getY();
         xMouse = e.getX();
-        if (reSize == 0) {
+        if (gameFrame.getWidth() <= 200) {
             Circle bullet = new Circle(ball.getX() + 8, ball.getY() + 8, 10, counter, Color.GREEN);
             bullet.setxSpeed(6 * (-ball.getX() - 8 + xMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));
             bullet.setySpeed(6 * (-ball.getY() - 8 + yMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));

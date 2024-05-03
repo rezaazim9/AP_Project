@@ -19,22 +19,31 @@ public class GameFrame{
     public static int wave=0;
     public static int xp=0;
     public static int hp=0;
-    public static ImagePanel panel;
-   public static JLabel information=new JLabel();
+    public final static ImagePanel panel;
 
+    static {
+        try {
+            panel = new ImagePanel("C:\\Users\\ostad\\IdeaProjects\\AP_phase1\\src\\Model\\img0.jpg",700,700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static JLabel information=new JLabel();
+static int c=0;
     public void mainFrame() throws IOException {
         gameFrame.setSize(700, 700);
-        panel = new ImagePanel(gameFrame.getWidth(),gameFrame.getHeight());
        panel.setLayout(null);
        panel.paintGameFrame();
+       information();
         gameFrame.setResizable(false);
+        gameFrame.add(panel);
         gameFrame.setBackground(Color.BLACK);
         gameFrame.setUndecorated(true);
-        gameFrame.setVisible(true);
         gameFrame.setLocation(400, 50);
-        information();
-        gameFrame.add(panel);
         gameFrame.setState(Frame.NORMAL);
+        gameFrame.setVisible(true);
+        triangles.add(new Triangle(450, 450, 25, Color.YELLOW, 0, 0, 0, 0, 5));
         new Controller.GameTimer().gameTimer();
     }
     public static void information(){
