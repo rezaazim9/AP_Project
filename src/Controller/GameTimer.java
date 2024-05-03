@@ -4,9 +4,11 @@ import Model.Circle;
 import Model.Square;
 import Model.Triangle;
 import View.GameFrame;
+import View.Menu;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.*;
@@ -20,13 +22,16 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
     Integer info = 0;
 
     static Timer timer;
-    int reSize = 1;
+    int reSize ;
 
-    public void gameTimer() {
+    public void gameTimer()  {
+        reSize=1;
         gameFrame.addMouseListener(this);
         gameFrame.addKeyListener(this);
-        triangles.add(new Triangle(450,450,25,Color.YELLOW,0,0,0,0,5));
-        squares.add(new Square(400,400,35,Color.GREEN,0,0,0,0,5));
+        ball.setX(340);
+        ball.setY(340);
+        triangles.add(new Triangle(450, 450, 25, Color.YELLOW, 0, 0, 0, 0, 5));
+        squares.add(new Square(400, 400, 35, Color.GREEN, 0, 0, 0, 0, 5));
         timer = new Timer(15, this);
         timer.start();
     }
@@ -44,6 +49,10 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
         information.setLocation(information.getX() - reSize, information.getY() - 2 * reSize);
         movement();
         if (info == VK_Q) {
+            gameFrame.dispose();
+            ImagePanel.clearGameFrame();
+            Menu.menuFrame.setVisible(true);
+            timer.stop();
             infoBoolean = true;
         }
         if (infoBoolean) {
@@ -53,12 +62,12 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
         if (infoCounter > 2000) {
             information.setVisible(false);
             infoCounter = 0;
-            infoBoolean=false;
+            infoBoolean = false;
         }
-        if (ball.getY()>panel.getY()&&ball.getY()+ball.getRadius()<panel.getY()+panel.getHeight()||ballY*(ball.getY()-panel.getY())>=0) {
+        if (ball.getY() > panel.getY() && ball.getY() + ball.getRadius() < panel.getY() + panel.getHeight() || ballY * (ball.getY() - panel.getY()) >= 0) {
             ball.setY(ball.getY() - reSize - ballY);
         }
-        if (ball.getX()>panel.getX()&&ball.getX()+ball.getRadius()<panel.getX()+panel.getWidth()||ballX*(ball.getX()-panel.getX())<=0) {
+        if (ball.getX() > panel.getX() && ball.getX() + ball.getRadius() < panel.getX() + panel.getWidth() || ballX * (ball.getX() - panel.getX()) <= 0) {
             ball.setX(ball.getX() - reSize + ballX);
         }
         for (Circle bullet : bullets) {

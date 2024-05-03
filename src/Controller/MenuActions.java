@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
+import static View.Menu.menuFrame;
+
 public  class MenuActions {
     public  void exit() {
         System.exit(0);
@@ -14,13 +16,13 @@ public  class MenuActions {
 
     public  void settings() throws IOException {
         ImagePanel.clearGameFrame();
-       Menu.menuFrame.dispose();
+        menuFrame.setVisible(false);
         new SettingsFrame().settingsFrame();
     }
 
     public void start() throws IOException, AWTException {
         ImagePanel.paintGameFrame();
-         Menu.menuFrame.dispose();
+        menuFrame.setVisible(false);
         Robot robot = new Robot();
         robot.keyPress(KeyEvent.VK_WINDOWS);
         robot.keyPress(KeyEvent.VK_D);

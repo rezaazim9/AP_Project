@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Menu extends JPanel implements ActionListener {
- public static JFrame menuFrame ;
+ public static JFrame menuFrame=new JFrame() ;
     JButton exit = new JButton();
     JButton tutorial = new JButton();
     JButton start = new JButton();
@@ -18,13 +18,14 @@ public class Menu extends JPanel implements ActionListener {
     JButton settings = new JButton();
 
     public void menu() throws IOException {
-        menuFrame = new JFrame();
         menuFrame.setSize(550, 550);
-        ImagePanel imagePanel = new ImagePanel("C:\\Users\\ostad\\IdeaProjects\\AP_phase1\\src\\View\\g21qf4sq86s51.png", menuFrame.getWidth(), menuFrame.getHeight());
+        ImagePanel imagePanel = new ImagePanel( menuFrame.getWidth(), menuFrame.getHeight());
         menuFrame.setUndecorated(true);
         menuFrame.setLocation(500, 100);
         menuButtons(imagePanel);
         menuFrame.setResizable(false);
+        menuFrame.setBackground(Color.BLACK);
+
         menuFrame.add(imagePanel);
         menuFrame.setVisible(true);
     }

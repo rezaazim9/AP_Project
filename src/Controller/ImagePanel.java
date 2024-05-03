@@ -15,17 +15,14 @@ import static View.GameFrame.*;
 public class ImagePanel extends JPanel {
     private final int width;
     private final int height;
-    private final Image backgroundImage;
-    private final String image;
     public static Circle ball = new Circle(340, 340, 25, 0, Color.RED);
     public static boolean paint=false;
 
 
-    public ImagePanel(String fileName, int width, int height) throws IOException {
-        image = fileName;
-        backgroundImage = ImageIO.read(new File(fileName));
+    public ImagePanel( int width, int height) {
         this.height = height;
         this.width = width;
+        this.setBackground(Color.BLACK);
     }
 
     private int x;
@@ -41,14 +38,6 @@ public class ImagePanel extends JPanel {
 
     public int getY2() {
         return y;
-    }
-
-    public Image getBackgroundImage() {
-        return backgroundImage;
-    }
-
-    public String getImage() {
-        return image;
     }
 
     public void setY(int y) {
@@ -70,7 +59,6 @@ public class ImagePanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(backgroundImage, getX2(), getY2(), width, height, this);
         if (paint) {
             for (Circle bullet : bullets) {
                 bullet.paint(g);

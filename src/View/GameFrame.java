@@ -24,10 +24,11 @@ public class GameFrame{
 
     public void mainFrame() throws IOException {
         gameFrame.setSize(700, 700);
-        panel = new ImagePanel("C:\\Users\\ostad\\IdeaProjects\\AP_phase1\\src\\View\\g21qf4sq86s51.png",gameFrame.getWidth(),gameFrame.getHeight());
+        panel = new ImagePanel(gameFrame.getWidth(),gameFrame.getHeight());
        panel.setLayout(null);
        panel.paintGameFrame();
         gameFrame.setResizable(false);
+        gameFrame.setBackground(Color.BLACK);
         gameFrame.setUndecorated(true);
         gameFrame.setVisible(true);
         gameFrame.setLocation(400, 50);

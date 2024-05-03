@@ -22,7 +22,7 @@ public class SettingsFrame implements ActionListener {
 
     public void settingsFrame() throws IOException {
         settingsFrame.setSize(600, 400);
-        settingsPanel = new ImagePanel("C:\\Users\\ostad\\IdeaProjects\\AP_phase1\\src\\View\\g21qf4sq86s51.png", settingsFrame.getWidth(), settingsFrame.getHeight());
+        settingsPanel = new ImagePanel( settingsFrame.getWidth(), settingsFrame.getHeight());
         songLabel.setBounds(50,125,200,35);
         songLabel.setForeground(Color.YELLOW);
         songLabel.setFont(new Font("Times New Roman", Font.BOLD, 30 ));
@@ -56,6 +56,8 @@ public class SettingsFrame implements ActionListener {
         settingsFrame.add(settingsPanel);
         settingsPanel.setLayout(null);
         settingsFrame.setUndecorated(true);
+        settingsFrame.setBackground(Color.BLACK);
+
         settingsFrame.setLocation(450, 150);
         settingsFrame.setVisible(true);
 
@@ -65,11 +67,7 @@ public class SettingsFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backButton) {
             settingsFrame.dispose();
-            try {
-                new Menu().menu();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+           Menu.menuFrame.setVisible(true);
         }
     }
 }
