@@ -34,13 +34,13 @@ public class SettingsFrame implements ActionListener {
             @Override
             public void stateChanged(ChangeEvent e) {
                 FloatControl gainControl = (FloatControl) Song.clip.getControl(FloatControl.Type.MASTER_GAIN);
-                float currentMusicVolume = 0;
+                float currentMusicVolume = 50;
 
                 if (e.getSource() == songSlider) {
                     currentMusicVolume = songSlider.getValue() ;
 
                 }
-                gainControl.setValue(-30 + (36*currentMusicVolume)/100);
+                gainControl.setValue(-8+ 14*(currentMusicVolume-50)/50);
             }
         });
         settingsFrame.setState(Frame.NORMAL);

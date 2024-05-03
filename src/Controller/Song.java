@@ -12,6 +12,8 @@ public class Song {
         AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
         clip = AudioSystem.getClip();
         clip.open(audioIn);
+        FloatControl gainControl = (FloatControl) Song.clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-8);
         clip.start();
     }
 }
