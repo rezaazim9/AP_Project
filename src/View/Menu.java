@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Menu extends JPanel implements ActionListener {
-    public static JFrame menuFrame = new JFrame();
+ public static JFrame menuFrame ;
     JButton exit = new JButton();
     JButton tutorial = new JButton();
     JButton start = new JButton();
@@ -18,17 +18,19 @@ public class Menu extends JPanel implements ActionListener {
     JButton settings = new JButton();
 
     public void menu() throws IOException {
+        menuFrame = new JFrame();
         menuFrame.setSize(550, 550);
         ImagePanel imagePanel = new ImagePanel("C:\\Users\\ostad\\IdeaProjects\\AP_phase1\\src\\View\\g21qf4sq86s51.png", menuFrame.getWidth(), menuFrame.getHeight());
-        menuFrame.setLocation(500, 100);
-        menuButtons();
         menuFrame.setUndecorated(true);
+        menuFrame.setLocation(500, 100);
+        menuButtons(imagePanel);
         menuFrame.setResizable(false);
         menuFrame.add(imagePanel);
         menuFrame.setVisible(true);
     }
 
-    public void menuButtons() {
+    public void menuButtons(JPanel panel) {
+        panel.setLayout(null);
         exit.setBounds(0, 0, 80, 40);
         exit.addActionListener(this);
         exit.setBackground(Color.BLUE);
@@ -59,11 +61,11 @@ public class Menu extends JPanel implements ActionListener {
         start.setText("Start");
         start.setFont(new Font(Font.DIALOG, Font.BOLD, 40));
         start.setFocusable(false);
-        menuFrame.add(exit);
-        menuFrame.add(settings);
-        menuFrame.add(start);
-        menuFrame.add(skillTree);
-        menuFrame.add(tutorial);
+        panel.add(exit);
+       panel.add(settings);
+       panel.add(start);
+        panel.add(skillTree);
+        panel.add(tutorial);
     }
 
     @Override

@@ -18,7 +18,7 @@ public class ImagePanel extends JPanel {
     private final Image backgroundImage;
     private final String image;
     public static Circle ball = new Circle(340, 340, 25, 0, Color.RED);
-    public static boolean paint=true;
+    public static boolean paint=false;
 
 
     public ImagePanel(String fileName, int width, int height) throws IOException {
@@ -60,10 +60,10 @@ public class ImagePanel extends JPanel {
     public void setY2(int y) {
         this.y = y;
     }
-    public void clearGameFrame(){
+    public static void clearGameFrame(){
         paint=false;
     }
-    public void paintGameFrame(){
+    public static void paintGameFrame(){
         paint=true;
     }
 

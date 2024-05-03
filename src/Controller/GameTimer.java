@@ -65,7 +65,7 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
             bullet.setX(bullet.getX() + bullet.getxSpeed());
             bullet.setY(bullet.getY() + bullet.getySpeed());
         }
-        if (GameFrame.gameFrame.getWidth() <= 500) {
+        if (GameFrame.gameFrame.getWidth() <= 200) {
             reSize = 0;
         }
         panel.repaint();
