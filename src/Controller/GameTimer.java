@@ -68,11 +68,14 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
             infoCounter = 0;
             infoBoolean = false;
         }
-        if (ball.getY() > panel.getY() && ball.getY() + ball.getRadius() < panel.getY() + panel.getHeight() || ballY * (ball.getY() - panel.getY()) >= 0) {
-            ball.setY(ball.getY() - reSize - ballY);
+        ball.setX(ball.getX() - reSize +ballX);
+        ball.setY(ball.getY() - reSize - ballY);
+        if ((ball.getY()< panel.getY()||ball.getY()+ball.getRadius()> panel.getY()+panel.getHeight())) {
+            ball.setY(ball.getY() + reSize + ballY);
+
         }
-        if (ball.getX() > panel.getX() && ball.getX() + ball.getRadius() < panel.getX() + panel.getWidth() || ballX * (ball.getX() - panel.getX()) <= 0) {
-            ball.setX(ball.getX() - reSize + ballX);
+        if ((ball.getX()+ball.getRadius()> panel.getX()+panel.getWidth()||ball.getX()<panel.getX())) {
+            ball.setX(ball.getX() + reSize - ballX);
         }
         for (Circle bullet : bullets) {
             bullet.setX(bullet.getX() + bullet.getxSpeed());
@@ -87,19 +90,19 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
 
     private void movement() {
         if (pressedKeys.contains(VK_W)) {
-            ballY = 1;
+            ballY = 2;
         }
         if (pressedKeys.contains(VK_S)) {
-            ballY = -1;
+            ballY = -2;
         }
         if (!(pressedKeys.contains(VK_S) || pressedKeys.contains(VK_W)) || (pressedKeys.contains(VK_S) && pressedKeys.contains(VK_W))) {
             ballY = 0;
         }
         if (pressedKeys.contains(VK_D)) {
-            ballX = 1;
+            ballX = 2;
         }
         if (pressedKeys.contains(VK_A)) {
-            ballX = -1;
+            ballX = -2;
         }
         if (!(pressedKeys.contains(VK_A) || pressedKeys.contains(VK_D)) || (pressedKeys.contains(VK_A) && pressedKeys.contains(VK_D))) {
             ballX = 0;
@@ -121,8 +124,8 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
         xMouse = e.getX();
         if (gameFrame.getWidth() <= 200) {
             Circle bullet = new Circle(ball.getX() + 8, ball.getY() + 8, 10, counter, Color.GREEN);
-            bullet.setxSpeed(6 * (-ball.getX() - 8 + xMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));
-            bullet.setySpeed(6 * (-ball.getY() - 8 + yMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));
+            bullet.setxSpeed(7 * (-ball.getX() - 8 + xMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));
+            bullet.setySpeed(7 * (-ball.getY() - 8 + yMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));
             bullets.add(bullet);
             counter++;
         }
