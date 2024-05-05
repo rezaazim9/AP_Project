@@ -3,11 +3,12 @@ package Controller;
 import Model.Circle;
 import Model.Square;
 import Model.Triangle;
-import View.GameFrame;
 import View.Menu;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.*;
@@ -21,11 +22,9 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
     Integer info = 0;
 
     static Timer timer;
-    int reSize=1;
+    int reSize = 1;
 
-    public  void gameTimer() {
-
-
+    public void gameTimer() {
         gameFrame.addMouseListener(this);
         gameFrame.addKeyListener(this);
         ball.setX(340);
@@ -33,7 +32,8 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
         panel.setY(0);
         panel.setX(0);
         information.setLocation(270, 700 - information.getFont().getSize() - 15);
-        squares.add(new Square(400, 400, 35, Color.GREEN, 0, 0, 0, 0, 5));
+        triangles.add(new Triangle(450, 450, 30, Color.YELLOW, 0, 0, 15, 0, 5));
+        squares.add(new Square(400, 400, 35, Color.GREEN, 0, 0, 10, 0, 5));
         timer = new Timer(15, this);
         timer.start();
     }
@@ -45,6 +45,23 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        for (Triangle triangle : triangles) {
+            for (Circle bullet : bullets) {
+                if (bullet.getShape().getBounds2D().intersects(triangle.getShape().getBounds2D())) {
+                    triangle.setHp(triangle.getHp() - 5);
+                    bullets.remove(bullet);
+                    break;
+                }
+            }
+        } for (Square square:squares) {
+            for (Circle bullet : bullets) {
+                if (square.getShape().getBounds2D().intersects(bullet.getShape().getBounds2D())) {
+                    square.setHp(square.getHp() - 5);
+                    bullets.remove(bullet);
+                    break;
+                }
+            }
+        }
         gameFrame.setBounds(gameFrame.getX() + reSize, gameFrame.getY() + reSize, gameFrame.getWidth() - reSize * 2, gameFrame.getHeight() - reSize * 2);
         panel.setX(panel.getX2() - reSize);
         panel.setY(panel.getY2() - reSize);
@@ -68,22 +85,43 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
             infoCounter = 0;
             infoBoolean = false;
         }
-        ball.setX(ball.getX() - reSize +ballX);
+        ball.setX(ball.getX() - reSize + ballX);
         ball.setY(ball.getY() - reSize - ballY);
-        if ((ball.getY()< panel.getY()||ball.getY()+ball.getRadius()> panel.getY()+panel.getHeight())) {
+        if ((ball.getY() < panel.getY() || ball.getY() + ball.getRadius() > panel.getY() + panel.getHeight())) {
             ball.setY(ball.getY() + reSize + ballY);
-
-        }
-        if ((ball.getX()+ball.getRadius()> panel.getX()+panel.getWidth()||ball.getX()<panel.getX())) {
-            ball.setX(ball.getX() + reSize - ballX);
         }
         for (Circle bullet : bullets) {
+            bullet.setShape(new Ellipse2D.Double(bullet.getX(), bullet.getY(), bullet.getRadius(), bullet.getRadius()));
+
             bullet.setX(bullet.getX() + bullet.getxSpeed());
             bullet.setY(bullet.getY() + bullet.getySpeed());
+
         }
-        if ( gameFrame.getWidth() <= 200) {
+        for (Triangle triangle : triangles) {
+            int[] xVertices = {(int) (triangle.getX() - triangle.getSize() * Math.sqrt(3) / 2), (int) (triangle.getX() + triangle.getSize() * Math.sqrt(3) / 2), (int) triangle.getX()};
+            int[] yVertices = {(int) triangle.getY() + triangle.getSize() / 2, (int) triangle.getY() + triangle.getSize() / 2, (int) triangle.getY() - triangle.getSize()};
+            triangle.setShape(new Polygon(xVertices,yVertices,3));
+            if (triangle.getHp() <= 0) {
+                triangles.remove(triangle);
+                break;
+            }
+        }
+        for (Square square : squares) {
+            square.setShape(new Rectangle((int)square.getX(), (int)square.getY(), square.getSize(), square.getSize()));
+            if (square.getHp() <= 0) {
+                squares.remove(square);
+                break;
+            }
+        }
+        if ((ball.getX() + ball.getRadius() > panel.getX() + panel.getWidth() || ball.getX() < panel.getX())) {
+            ball.setX(ball.getX() + reSize - ballX);
+        }
+
+        if (gameFrame.getWidth() <= 600) {
             reSize = 0;
         }
+
+        ball.setShape(new Ellipse2D.Double(ball.getX(), ball.getY(), ball.getRadius(), ball.getRadius()));
         panel.validate();
         panel.repaint();
     }
@@ -122,13 +160,13 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
     public void mousePressed(MouseEvent e) {
         yMouse = e.getY();
         xMouse = e.getX();
-        if (gameFrame.getWidth() <= 200) {
-            Circle bullet = new Circle(ball.getX() + 8, ball.getY() + 8, 10, counter, Color.GREEN);
-            bullet.setxSpeed(7 * (-ball.getX() - 8 + xMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));
-            bullet.setySpeed(7 * (-ball.getY() - 8 + yMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));
-            bullets.add(bullet);
-            counter++;
-        }
+
+        Circle bullet = new Circle(ball.getX() + 8, ball.getY() + 8, 10, counter, Color.GREEN);
+        bullet.setxSpeed(7 * (-ball.getX() - 8 + xMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));
+        bullet.setySpeed(7 * (-ball.getY() - 8 + yMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));
+        bullets.add(bullet);
+        counter++;
+
     }
 
     @Override

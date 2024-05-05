@@ -23,7 +23,7 @@ public class GameFrame{
 
     static {
         try {
-            panel = new ImagePanel("C:\\Users\\ostad\\IdeaProjects\\AP_phase1\\src\\Model\\img0.jpg",700,700);
+            panel = new ImagePanel("C:\\Users\\ostad\\IdeaProjects\\AP_phase1\\src\\Model\\4Ti0+G.png",700,700);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -31,7 +31,7 @@ public class GameFrame{
 
     public static JLabel information=new JLabel();
 static int c=0;
-    public void mainFrame() throws IOException {
+    public void mainFrame() {
         gameFrame.setSize(700, 700);
        panel.setLayout(null);
        panel.paintGameFrame();
@@ -48,7 +48,7 @@ static int c=0;
     }
     public static void information(){
         information.setForeground(Color.YELLOW);
-        information.setText("Wave :"+wave+" Time:"+time+" XP:0"+xp+" HP:"+hp);
+        information.setText("Wave:"+wave+" Time:"+time+" XP:"+xp+" HP:"+hp);
         information.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         information.setBounds(270,700-information.getFont().getSize()-15,180,information.getFont().getSize());
         information.setVisible(false);

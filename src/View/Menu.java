@@ -19,7 +19,7 @@ public class Menu extends JPanel implements ActionListener {
 
     public void menu() throws IOException {
         menuFrame.setSize(550, 550);
-        ImagePanel imagePanel = new ImagePanel("C:\\Users\\ostad\\IdeaProjects\\AP_phase1\\src\\Model\\img0.jpg", menuFrame.getWidth(), menuFrame.getHeight());
+        ImagePanel imagePanel = new ImagePanel("C:\\Users\\ostad\\IdeaProjects\\AP_phase1\\src\\Model\\4Ti0+G.png", menuFrame.getWidth(), menuFrame.getHeight());
         menuFrame.setUndecorated(true);
         menuFrame.setLocation(500, 100);
         menuButtons(imagePanel);

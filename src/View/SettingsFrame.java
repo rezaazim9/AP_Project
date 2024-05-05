@@ -22,7 +22,7 @@ public class SettingsFrame implements ActionListener {
 
     public void settingsFrame() throws IOException {
         settingsFrame.setSize(600, 400);
-        settingsPanel = new ImagePanel( "C:\\Users\\ostad\\IdeaProjects\\AP_phase1\\src\\Model\\img0.jpg",settingsFrame.getWidth(), settingsFrame.getHeight());
+        settingsPanel = new ImagePanel( "C:\\Users\\ostad\\IdeaProjects\\AP_phase1\\src\\Model\\4Ti0+G.png",settingsFrame.getWidth(), settingsFrame.getHeight());
         songLabel.setBounds(50,125,200,35);
         songLabel.setForeground(Color.YELLOW);
         songLabel.setFont(new Font("Times New Roman", Font.BOLD, 30 ));

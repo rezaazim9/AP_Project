@@ -63,6 +63,9 @@ public class ImagePanel extends JPanel {
     }
     public static void clearGameFrame(){
         paint=false;
+        bullets.clear();
+        triangles.clear();
+        squares.clear();
     }
     public static void paintGameFrame(){
         paint=true;

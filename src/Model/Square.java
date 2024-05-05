@@ -12,6 +12,7 @@ public class Square {
     private int hp;
     private int thick;
     private double rotationSpeed;
+    private Shape shape;
     public Square(double x, double y, int size, Color color, double xSpeed, double ySpeed, int hp,double rotationSpeed,int thick) {
         this.x = x;
         this.y = y;
@@ -22,6 +23,13 @@ public class Square {
         this.hp = hp;
         this.rotationSpeed = rotationSpeed;
         this.thick = thick;
+        this.shape=new Rectangle((int)getX(), (int)getY(), getSize(), getSize());
+    }
+    public void setShape(Shape shape){
+        this.shape=shape;
+    }
+    public Shape getShape(){
+        return shape;
     }
     public  int getThick(){
         return thick;

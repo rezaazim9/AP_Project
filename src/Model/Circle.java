@@ -1,6 +1,7 @@
 package Model;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 
 public class Circle {
     private double x;
@@ -10,6 +11,7 @@ public class Circle {
     private double xSpeed;
     private double ySpeed;
     private int id;
+    private Shape shape;
 
     public Circle(double x,double y, int radius,int id,Color color) {
         this.x = x;
@@ -17,6 +19,13 @@ public class Circle {
         this.color = color;
         this.id = id;
         this.radius = radius;
+        shape=new Ellipse2D.Double(getX(),getY(),getRadius(),getRadius());
+    }
+    public void setShape(Shape shape){
+        this.shape=shape;
+    }
+    public Shape getShape(){
+        return shape;
     }
 
     public double getX() {
