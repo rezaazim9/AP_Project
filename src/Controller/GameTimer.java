@@ -8,7 +8,7 @@ import View.Menu;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.*;
@@ -25,8 +25,8 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
     int reSize = 1;
 
     public void gameTimer() {
-        gameFrame.addMouseListener(this);
-        gameFrame.addKeyListener(this);
+       gameFrame.addMouseListener(this);
+       gameFrame.addKeyListener(this);
         ball.setX(340);
         ball.setY(340);
         panel.setY(0);
@@ -71,10 +71,12 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
             infoBoolean = true;
         }
         if (info == VK_E) {
-            gameFrame.dispose();
-            ImagePanel.clearGameFrame();
-            Menu.menuFrame.setVisible(true);
             timer.stop();
+            ImagePanel.clearGameFrame();
+           gameFrame.remove(panel);
+            gameFrame.dispose();
+            gameFrame.removeMouseListener(this);
+            Menu.menuFrame.setVisible(true);
         }
         if (infoBoolean) {
             infoCounter += 15;
@@ -117,13 +119,13 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
             ball.setX(ball.getX() + reSize - ballX);
         }
 
-        if (gameFrame.getWidth() <= 600) {
+        if (gameFrame.getWidth() <= 550) {
             reSize = 0;
         }
 
         ball.setShape(new Ellipse2D.Double(ball.getX(), ball.getY(), ball.getRadius(), ball.getRadius()));
-        panel.validate();
-        panel.repaint();
+       gameFrame.validate();
+        gameFrame.repaint();
     }
 
     private void movement() {
@@ -160,18 +162,15 @@ public class GameTimer implements ActionListener, MouseListener, KeyListener {
     public void mousePressed(MouseEvent e) {
         yMouse = e.getY();
         xMouse = e.getX();
-
         Circle bullet = new Circle(ball.getX() + 8, ball.getY() + 8, 10, counter, Color.GREEN);
         bullet.setxSpeed(7 * (-ball.getX() - 8 + xMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));
         bullet.setySpeed(7 * (-ball.getY() - 8 + yMouse) / Math.sqrt(Math.pow(ball.getX() - xMouse, 2) + Math.pow(ball.getY() - yMouse, 2)));
         bullets.add(bullet);
         counter++;
-
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
 
     @Override

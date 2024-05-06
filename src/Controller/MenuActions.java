@@ -21,7 +21,6 @@ public  class MenuActions {
     }
 
     public void start() throws IOException, AWTException {
-        ImagePanel.paintGameFrame();
         menuFrame.dispose();
         Robot robot = new Robot();
         robot.keyPress(KeyEvent.VK_WINDOWS);

@@ -19,21 +19,16 @@ public class GameFrame{
     public static int wave=0;
     public static int xp=0;
     public static int hp=0;
-    public final static ImagePanel panel;
+    public static ImagePanel panel;
 
-    static {
-        try {
-            panel = new ImagePanel("C:\\Users\\ostad\\IdeaProjects\\AP_phase1\\src\\Model\\4Ti0+G.png",700,700);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public static JLabel information=new JLabel();
 static int c=0;
-    public void mainFrame() {
+    public void mainFrame() throws IOException {
         gameFrame.setSize(700, 700);
-       panel.setLayout(null);
+        panel = new ImagePanel("C:\\Users\\ostad\\IdeaProjects\\AP_phase1\\src\\Model\\4Ti0+G.png",700,700);
+        panel.revalidate();
+        panel.setLayout(null);
        panel.paintGameFrame();
        information();
         gameFrame.setResizable(false);

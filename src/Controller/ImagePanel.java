@@ -66,6 +66,7 @@ public class ImagePanel extends JPanel {
         bullets.clear();
         triangles.clear();
         squares.clear();
+        GameTimer.counter=1;
     }
     public static void paintGameFrame(){
         paint=true;
